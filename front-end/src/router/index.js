@@ -4,9 +4,8 @@ import Home from '../views/Home.vue'
 import Info from '../views/Info.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Tracker from '../components/Tracker.vue'
-import Addpage from '../views/Addpage.vue'
-import Admin from '../views/Admin.vue'
 
+import List from '../views/List.vue'
 
 
 Vue.use(VueRouter)
@@ -33,14 +32,9 @@ const routes = [
     component: Tracker
   },
   {
-    path: '/addpage',
-    name: 'Addpage',
-    components: Addpage
-  },
-  {
-    path: '/admin',
-    name: 'admin',
-    components: Admin
+    path: '/list',
+    name: 'List',
+    components: List
   }
 ]
 

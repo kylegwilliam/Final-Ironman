@@ -43,7 +43,10 @@ const upload = multer({
 // Create a scheme for items in the museum: a title and a path to an image.
 const itemSchema = new mongoose.Schema({
   title: String,
+  name: String,
+  date: String,
   path: String,
+  distance: String,
 });
 
 // Upload a photo. Uses the multer middleware for the upload and then returns
@@ -62,6 +65,9 @@ app.post('/api/photos', upload.single('photo'), async (req, res) => {
 app.post('/api/items', async (req, res) => {
   const item = new Item({
     title: req.body.title,
+    name: req.body.name,
+    distance: req.body.distance,
+    date: req.body.date,
     path: req.body.path,
   });
   try {
@@ -71,6 +77,46 @@ app.post('/api/items', async (req, res) => {
     console.log(error);
     res.sendStatus(500);
   }
+});
+
+// Get a list of all of the items in the museum.
+app.get('/api/items', async (req, res) => {
+  try {
+    let items = await Item.find();
+    res.send(items);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+app.delete('/api/items/:id', async (req, res) => {
+  try {
+    await Item.deleteOne({
+      _id: req.params.id
+    });
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    req.sendStatus(500);
+  }
+});
+
+app.put('/api/itmes/:id', async (req, res) => {
+    try {
+        let item = await Item.findOne({_id:req.params.itemID, project: req.params.projectID});
+        if (!item) {
+            res.send(404);
+            return;
+        }
+        item.date = req.body.date;
+        item.completed = req.body.completed;
+        await item.save();
+        res.send(item);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
 });
 
 

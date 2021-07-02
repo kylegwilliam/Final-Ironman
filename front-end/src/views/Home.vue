@@ -1,53 +1,88 @@
+
 <template>
-  <div>
-
-    <b-container class="bv-example-row">
-      <b-row class="text-center">
-        <b-col><img src="@/assets/Bike.jpg"></b-col>
-        <b-col>
-          <b-card
-            title="Welcome to Triathlon Trainning"
-            img-alt="Image"
-            img-top
-            tag="article"
-            style="max-width: 20rem;"
-            class="mb-2"
-          >
-            <b-card-text>
-              This website is a help to anyone trying to complete their triathlon fitness goal. With a helpful comunity, fitness tracker, as well as a user freindly envornment, everyone can benifit and achieve their goals!
-            </b-card-text>
-
-          </b-card>
-
-        </b-col>
-        <b-col><img src="@/assets/Run.jpg"></b-col>
-      </b-row>
-    </b-container>
-
-
-    <div>
-      <div>
-</div>
-
-    </div>
+  <div class="home">
+    <section class="image-gallery">
+      <div class="image" v-for="item in items" :key="item.id">
+        <h2>{{item.name}} - {{item.title}}</h2>
+        <img :src="item.path" />
+        <h2>{{item.distance}}</h2>
+      </div>
+    </section>
   </div>
-
 </template>
 
 <script>
+import axios from 'axios';
 // @ is an alias to /src
-
 export default {
   name: 'Home',
-  components: {
+  data() {
+  return {
+   items: [],
   }
+},
+created() {
+  this.getItems();
+},
+methods: {
+  async getItems() {
+    try {
+      let response = await axios.get("/api/items");
+      this.items = response.data;
+      return true;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+}
 }
 </script>
 
-<style>
 
-img {
-  max-width: 300%;
-  height: auto;
+<style scoped>
+.image h2 {
+  font-style: italic;
+}
+
+/* Masonry */
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.image-gallery {
+  column-gap: 1.5em;
+}
+
+.image {
+  margin: 0 0 1.5em;
+  display: inline-block;
+  width: 100%;
+}
+
+.image img {
+  width: 100%;
+}
+
+/* Masonry on large screens */
+@media only screen and (min-width: 1024px) {
+  .image-gallery {
+    column-count: 4;
+  }
+}
+
+/* Masonry on medium-sized screens */
+@media only screen and (max-width: 1023px) and (min-width: 768px) {
+  .image-gallery {
+    column-count: 3;
+  }
+}
+
+/* Masonry on small screens */
+@media only screen and (max-width: 767px) and (min-width: 540px) {
+  .image-gallery {
+    column-count: 2;
+  }
 }
 </style>
