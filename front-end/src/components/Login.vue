@@ -18,8 +18,12 @@
         <input type="password" placeholder="password" v-model="password">
       </fieldset>
       <fieldset>
+        <input placeholder="birthday" v-model="birthday">
+      </fieldset>
+      <fieldset>
         <button type="submit" class="pure-button pure-button-primary" @click.prevent="register">Register</button>
       </fieldset>
+
     </form>
     <p v-if="error" class="error">{{error}}</p>
     <form class="pure-form space-above">
@@ -50,6 +54,7 @@ export default {
       lastName: '',
       username: '',
       password: '',
+      birthday: '',
       usernameLogin: '',
       passwordLogin: '',
       error: '',
