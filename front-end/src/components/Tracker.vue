@@ -4,12 +4,13 @@
 <h1>Record your workout</h1>
 <div class="heading">
   <h2>Add workout information:</h2>
+  
 </div>
 
 
 <div class="add">
   <div class="form">
-    <input v-model="name" placeholder="Full Name">
+    <input v-model="name" placeholder="Username">
     <p>----</p>
     <input v-model="date" placeholder="Date:(MM/DD/YYYY)">
     <p>----</p>
@@ -19,7 +20,6 @@
     <p>Please upload a picture of your workouts</p>
     <input type="file" name="photo" @change="fileChanged">
     <button @click="upload">Track your workout</button>
-    <p>----</p>
     <div class="upload" v-if="addItem">
       <h2>Workout Submitted!</h2>
       <p>Go look at "Past workouts" to see your workout</p>
@@ -27,28 +27,6 @@
   </div>
 
 </div>
-
-<div class="heading">
-  <h2>Change a past Workout:</h2>
-</div>
-<div class="heading">
-  <p>Search by name and date</p>
-</div>
-<div class="edit">
-  <div class="form">
-    <input v-model="findTitle" placeholder="Search">
-    <div class="suggestions" v-if="suggestions.length > 0">
-      <div class="suggestion" v-for="s in suggestions" :key="s.id" @click="selectItem(s)">{{s.name}}-{{s.date}}
-      </div>
-    </div>
-  </div>
-
-  <div class="actions" v-if="findItem">
-    <button @click="deleteItem(findItem)">Delete</button>
-    <button @click="editItem(findItem)">Edit</button>
-  </div>
-</div>
-
 
 </div>
 </template>

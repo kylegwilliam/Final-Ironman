@@ -2,12 +2,16 @@
 <div class="dashboard">
   <MyPhotos v-if="this.$root.$data.user != null" />
   <Login v-else />
+    <p>DASHBOARD.VUE</p>
 </div>
 </template>
 
 <script>
 import MyPhotos from '@/components/MyPhotos.vue';
 import Login from '@/components/Login.vue';
+
+//!import ImageGallery from '@/compnents/ImageGallery.vue';
+
 import axios from 'axios';
 export default {
   name: 'dashboard',

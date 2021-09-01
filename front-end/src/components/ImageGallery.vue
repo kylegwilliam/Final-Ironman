@@ -1,19 +1,19 @@
 <template>
 <div>
-  <p>POSTWORKOUT.VUE</p>
+  <p>Right here</p>
   <section class="image-gallery">
-    <div class="image" v-for="photo in photos" v-bind:key="items._id">
+    <div class="image" v-for="item in items" v-bind:key="items._id">
+      <p>WHY ISNT THIS WORKING</p>
       <img :src="items.path" />
       <div class="photoInfo">
-        <p class="photoTitle">{{photo.title}}</p>
-        <p class="photoName">{{ironman.user.firstName}} {{ironman.user.lastName}}</p>
+        <p>PLEASE SAY SOMTHING</p>
+        <p class="photoTitle">{{items.title}}</p>
       </div>
-      <p class="photoDate">{{formatDate(photo.created)}}</p>
     </div>
   </section>
 </div>
-
 </template>
+
 
 <script>
 import moment from 'moment';

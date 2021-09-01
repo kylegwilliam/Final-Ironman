@@ -90,7 +90,27 @@ app.get('/api/items', async (req, res) => {
   }
 });
 
+app.get('/api/items/:id', async (req, res) => {
+  try {
+    let item = await Item.findOne({_id:req.params.id});
+
+    if (!item) {
+        console.log("Item not found");
+        res.sendStatus(400);
+        return;
+    }
+      res.send(item);
+
+
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+
+})
+
 app.delete('/api/items/:id', async (req, res) => {
+  console.log("is the delete working?")
   try {
     await Item.deleteOne({
       _id: req.params.id
@@ -102,16 +122,21 @@ app.delete('/api/items/:id', async (req, res) => {
   }
 });
 
-app.put('/api/itmes/:id', async (req, res) => {
+app.put("/api/items/:id", async (req, res) => {
+  console.log("HELLO WORLD")
     try {
-        let item = await Item.findOne({_id:req.params.itemID, project: req.params.projectID});
+        let item = await Item.findOne({_id:req.params.id});
         if (!item) {
-            res.send(404);
+            console.log("there are no items")
             return;
         }
-        item.date = req.body.date;
-        item.completed = req.body.completed;
+        item.title = req.body.title,
+        item.name = req.body.name,
+        item.distance = req.body.distance,
+        item.date = req.body.date,
+        item.path = req.body.path,
         await item.save();
+
         res.send(item);
     } catch (error) {
         console.log(error);
@@ -138,4 +163,4 @@ app.use("/api/workout", workout.routes);
 
 
 
-app.listen(3001, () => console.log('Server listening on port 3001!'));
+app.listen(3001, () => console.log('Server is now listening on port 3001!'));

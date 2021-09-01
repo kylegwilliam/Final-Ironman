@@ -16,6 +16,7 @@
             <div v-if="!url" class="placeholder">
               Choose an Image
             </div>
+
             <input class="fileInput" ref="fileInput" type="file" @input="fileChanged">
           </div>
           <p v-if="error" class="error">{{error}}</p>

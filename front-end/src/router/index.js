@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Info from '../views/Info.vue'
 import Dashboard from '../views/Dashboard.vue'
+import Edit from '../components/Edit.vue'
 import Tracker from '../components/Tracker.vue'
 
 import List from '../views/List.vue'
@@ -35,7 +36,12 @@ const routes = [
     path: '/list',
     name: 'List',
     components: List
-  }
+  },
+  {
+    path: '/edit/:id',
+    name: 'Edit',
+    component: Edit
+  },
 ]
 
 const router = new VueRouter({

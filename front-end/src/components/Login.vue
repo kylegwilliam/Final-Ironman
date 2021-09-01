@@ -2,6 +2,7 @@
 <div class="hero">
   <div class="heroBox">
     <form class="pure-form">
+      <p>LOGIN.VUE</p>
       <fieldset>
         <legend>Register for an account</legend>
         <input placeholder="first name" v-model="firstName">
